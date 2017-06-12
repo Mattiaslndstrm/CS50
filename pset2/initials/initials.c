@@ -12,14 +12,12 @@ int main(void)
 }
 
 void initials(string name) 
-{
-    if (name[0] != 32)
-    {
-        printf("%c", toupper(name[0]));
-    }
+{   
+    // Prints the character at index i in uppercase if the preceding character 
+    // is a space and not a space or index is 0 and not a space.
     for (int i = 0, n = strlen(name); i < n; i++)
     {   
-        if (name[i] != 32 && name[i -1] == 32)
+        if (name[i] != 32 && (name[i -1] == 32 || i == 0))
         {
             printf("%c", toupper(name[i]));
         }
