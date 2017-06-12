@@ -27,11 +27,17 @@ int main(int argc, string argv[])
 
 string vigenere(string keyword, string plain)
 {
+    int non_alpha = 0;
     for (int i = 0, n = strlen(plain); i < n; i ++) {
         // Equals the difference between the current character in keyword  
         // converted to lowercase and lowercase a. The current position in 
         // keyword equals i % (length of keyword)
-        int diff = tolower(keyword[i % strlen(keyword)]) - 97;
+
+        if (!isalpha(plain[i]))
+        {
+            non_alpha += 1;
+        }
+        int diff = tolower(keyword[i - non_alpha % strlen(keyword)]) - 97;
 
         // For uppercase. plain[i] + diff - 13) % 26 equals the position of 
         // the cipher letter in the alphabet (because 65 % 26 = 13) . Add 65 
