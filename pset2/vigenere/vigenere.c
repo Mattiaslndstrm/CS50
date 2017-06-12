@@ -3,9 +3,21 @@
 #include <string.h>
 #include <ctype.h>
 
-void initials(string name);
+string vigenere(string plain);
 
-int main(void) 
+int main(int argc, string argv[]) 
 {   
-    
+    if (argc == 2)
+    {
+        printf("plaintext: ");
+        string plaintext = get_string();
+        printf("ciphertext: %s\n", vigenere(plaintext));
+    }
+
+    else
+    {
+        printf("Usage: ./vigenere plaintext");
+        return 1;
+    }
 }
+
