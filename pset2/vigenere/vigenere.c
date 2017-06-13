@@ -4,38 +4,46 @@
 #include <ctype.h>
 
 string vigenere(string keyword, string plain);
+bool alpha(string word);
 
 int main(int argc, string argv[]) 
 {   
     // Checks if there is one additional command line argument.
     if (argc == 2)
-    
-    {   bool alpha = true;
-        // Iterates through the keyword and changes the boolean alpha to false
-        // if it contains any non-alphabetic characters.
-        for (int j = 0, m = strlen(argv[1]); j < m; j++)
-        {
-            if (!isalpha(argv[1][j]))
-            {
-                alpha = false;
-            }
-        }
-
-        if (alpha)
+    {
+        // Checks if the keyword does not contain any non-alphabetic 
+        // characters
+        if (alpha(argv[1]))
         {
             printf("plaintext: ");
             // Gets the plain text from the user
             string plaintext = get_string();
-            // Prints the encoded string from the command line argument stored in 
-            // position 1
+            // Prints the encoded string from the command line argument stored  
+            // in position 1
             printf("ciphertext: %s\n", vigenere(argv[1], plaintext));
             // To terminate the program
             return 0;
         }
     }
+
     // Incorrect use of vigenere. Exit with error.
     printf("Usage: ./vigenere keyword\n");
     return 1;
+}
+
+bool alpha(string word)
+// Iterates through the string word and returns false if it contains any 
+// non-alphabetic characters.
+{   
+    bool alpha = true;
+    for (int j = 0, m = strlen(word); j < m; j++)
+        {
+            if (!isalpha(word[j]))
+        {
+            alpha = false;
+        }
+        }
+    return alpha;
 }
 
 string vigenere(string keyword, string plain)
@@ -65,9 +73,9 @@ string vigenere(string keyword, string plain)
             plain[i] = (plain[i] + diff - 13) % 26 + 65;
         }
         // For lowercase. plain[i] + diff - 19) % 26 equals the position of 
-        // the cipher letter in the alphabet (because 97 % 26 = 19). Add 97 and 
-        // we get the position of the letter in ASCII. Changes the current 
-        //character of plain to the cipherletter
+        // the cipher letter in the alphabet (because 97 % 26 = 19). Add 97  
+        // and we get the position of the letter in ASCII. Changes the current 
+        // character of plain to the cipherletter
         if (plain[i] >= 97 && plain[i] <= 122)
         {
             plain[i] = (plain[i] + diff - 19) % 26 + 97;
