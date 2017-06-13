@@ -58,14 +58,16 @@ string vigenere(string keyword, string plain)
 
         // For uppercase. plain[i] + diff - 13) % 26 equals the position of 
         // the cipher letter in the alphabet (because 65 % 26 = 13) . Add 65 
-        // and we get the position of the letter in ASCII.
+        // and we get the position of the letter in ASCII. Changes the current 
+        //character of plain to the cipherletter
         if (plain[i] >= 65 && plain[i] <= 90)
         {   
             plain[i] = (plain[i] + diff - 13) % 26 + 65;
         }
         // For lowercase. plain[i] + diff - 19) % 26 equals the position of 
         // the cipher letter in the alphabet (because 97 % 26 = 19). Add 97 and 
-        // we get the position of the letter in ASCII. 
+        // we get the position of the letter in ASCII. Changes the current 
+        //character of plain to the cipherletter
         if (plain[i] >= 97 && plain[i] <= 122)
         {
             plain[i] = (plain[i] + diff - 19) % 26 + 97;
