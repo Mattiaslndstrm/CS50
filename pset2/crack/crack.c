@@ -8,7 +8,7 @@
 #define ARRAY_LENGTH 7314372
 #define STRING_LENGTH 5
 
-string crack(string hash);
+string crack(string hash, string salt);
 char toChar(int num);
 void generateArray(void);
 char arr[ARRAY_LENGTH][STRING_LENGTH] = {0};
@@ -19,22 +19,29 @@ int main(int argc, string argv[])
     {
         generateArray();
         string hash = argv[1];
-        printf("%s\n", crypt(hash, "abcd"));
+        //https://stackoverflow.com/questions/4214314/get-a-substring-of-a-char
+        char salt[3];
+        memcpy(salt, &hash[0], 2);
+        salt[2] = '\0';
+        printf("%s\n", crack(hash, salt));
     }
     else
     {
         printf("Usage: ./crack hash\n");
         return 1;
     }
-    for (int a = 7314332; a < 7314372; a++)
-    {
-        printf("%i: %s\n", a, arr[a]);
-    }
 }
 
-string crack(string hash)
+string crack(string hash, string salt)
 {
-
+    for (int x = 0; x < ARRAY_LENGTH; x++)
+    {
+        if (strcmp(crypt(arr[x], salt), hash) == 0)
+        {
+            return arr[x];
+        }
+    }
+    return "apa";
 }
 
 void generateArray(void)
