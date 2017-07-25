@@ -4,37 +4,39 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#define AL 52
 
 void crack(void);
+char toChar(int num);
 
 // int main(int argc, string argv[])
 int main(void)
 {
-    char arr[7554981][5];
-    for (int f = 0; f < 52; f++)
+    char arr[7455980][5];
+    for (int f = 0; f < AL; f++)
     {
-        arr[f][0] = (f < 26) ? (f + 65) : (f + 71);
+        arr[f][0] = toChar(f);
         arr[f][1] = '\0';
-        for (int g = 0; g < 52; g++)
-        {
-            arr[g + 52 + 52 * f][0] = (f < 26) ? (f + 65) : (f + 71);
-            arr[g + 52 + 52 * f][1] = (g < 26) ? (g + 65) : (g + 71);
-            arr[g + 52 + 52 * f][2] = '\0';
-            for (int h = 0; h < 52; h++)
-            {
-                arr[52*53 + h + 52*g + 52*52*f][0] = (f < 26) ? (f + 65) : (f + 71);
-                arr[52*53 + h + 52*g + 52*52*f][1] = (g < 26) ? (g + 65) : (g + 71);
-                arr[52*53 + h + 52*g + 52*52*f][2] = (h < 26) ? (h + 65) : (h + 71);
-                arr[52*53 + h + 52*g + 52*52*f][3] = '\0';
+        for (int g = 0; g < AL; g++)
+        {   int second = g + AL + AL * f;
+            arr[second][0] = toChar(f);
+            arr[second][1] = toChar(g);
+            arr[second][2] = '\0';
+            for (int h = 0; h < AL; h++)
+            {   int third = AL*(AL+1) + h + AL*g + AL*AL*f;
+                arr[third][0] = toChar(f);
+                arr[third][1] = toChar(g);
+                arr[third][2] = toChar(h);
+                arr[third][3] = '\0';
                 // printf("f = %c, g = %c, h = %c, arr = %i\n", f, g, h,h - 97) + 26*27 + ((f -97)*(26^2 +1)) + (g - 97)*(26+1));
 
-                for (int i = 0; i < 52; i++)
-                {
-                    arr[52*53 + i + 52*h + 52*52*g + 52*52*52*f][0] = (f < 26) ? (f + 65) : (f + 71);
-                    arr[52*53 + i + 52*h + 52*52*g + 52*52*52*f][1] = (g < 26) ? (g + 65) : (g + 71);
-                    arr[52*53 + i + 52*h + 52*52*g + 52*52*52*f][2] = (h < 26) ? (h + 65) : (h + 71);
-                    arr[52*53 + i + 52*h + 52*52*g + 52*52*52*f][3] = (i < 26) ? (i + 65) : (i + 71);
-                    arr[52*53 + i + 52*h + 52*52*g + 52*52*52*f][4] = '\0';
+                for (int i = 0; i < AL; i++)
+                {   int fourth = AL*(AL+1) + i + AL*h + AL*AL*g + AL*AL*AL*f;
+                    arr[fourth][0] = toChar(f);
+                    arr[fourth][1] = toChar(g);
+                    arr[fourth][2] = toChar(h);
+                    arr[fourth][3] = toChar(i);
+                    arr[fourth][4] = '\0';
                 }
             }
         }
@@ -54,6 +56,12 @@ int main(void)
     //     printf("Usage: ./crack hash\n");
     //     return 1;
     // }
+}
+
+
+char toChar(int num)
+{
+    return (num < 26) ? (num + 65) : (num + 71);
 }
 
 // void crack(void)
