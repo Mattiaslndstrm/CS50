@@ -1,6 +1,6 @@
 #define _XOPEN_SOURCE
 #include <unistd.h>
-#include <cs50.h>
+// #include <cs50.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -10,9 +10,11 @@ void crack(void);
 char toChar(int num);
 
 // int main(int argc, string argv[])
+
+char arr[7314372][5] = {0};
 int main(void)
 {
-    char arr[7455980][5];
+    // char arr[7314372][5];
     for (int f = 0; f < AL; f++)
     {
         arr[f][0] = toChar(f);
@@ -28,7 +30,6 @@ int main(void)
                 arr[third][1] = toChar(g);
                 arr[third][2] = toChar(h);
                 arr[third][3] = '\0';
-                // printf("f = %c, g = %c, h = %c, arr = %i\n", f, g, h,h - 97) + 26*27 + ((f -97)*(26^2 +1)) + (g - 97)*(26+1));
 
                 for (int i = 0; i < AL; i++)
                 {   int fourth = AL*(AL+1) + i + AL*h + AL*AL*g + AL*AL*AL*f;
@@ -41,7 +42,7 @@ int main(void)
             }
         }
     }
-    for (int a = 100000; a < 110000; a++)
+    for (int a = 7314332; a < 7314372; a++)
     {
         printf("%i: %s\n", a, arr[a]);
     }
