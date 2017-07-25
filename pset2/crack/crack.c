@@ -10,7 +10,7 @@ void crack(void);
 // int main(int argc, string argv[])
 int main(void)
 {
-    char arr[7314371][5];
+    char arr[7554981][5];
     for (int f = 0; f < 52; f++)
     {
         arr[f][0] = (f < 26) ? (f + 65) : (f + 71);
@@ -39,7 +39,7 @@ int main(void)
             }
         }
     }
-    for (int a = 7314000; a < 7314100; a++)
+    for (int a = 100000; a < 110000; a++)
     {
         printf("%i: %s\n", a, arr[a]);
     }
