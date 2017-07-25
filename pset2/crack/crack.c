@@ -5,43 +5,89 @@
 #include <stdio.h>
 #include <string.h>
 
-string crack(string hash);
+void crack(void);
 
-int main(int argc, string argv[])
+// int main(int argc, string argv[])
+int main(void)
 {
-    if (argc == 2)
+    char arr[7314371][5];
+    for (char f = 0; f < 52; f++)
     {
-        string hash = argv[1];
-        printf("%s\n", crypt(hash, "abcd"));
-    }
-    else 
-    {
-        printf("Usage: ./crack hash\n");
-        return 1;
-    }
-}
-
-string crack(string hash)
-{   
-    const char *arr[500000];
-    for (int f = 0; f < 25; f++)
-    {
-        arr[f] = (string) (97 + f);
-        for (int g = 0; g < 25; g++)
-            string *twochar = strcat((string) 97 + f, (string) 97 + g);
-            arr[g + 25 + 25*f]  = twochar;
+        arr[f][0] = (f < 26) ? (f + 65) : (f + 71);
+        arr[f][1] = '\0';
+        for (char g = 0; g < 52; g++)
         {
-            for (int h = 0; h < 25; h++)
+            arr[g + 52 + 52 * f][0] = (f < 26) ? (f + 65) : (f + 71);
+            arr[g + 52 + 52 * f][1] = (g < 26) ? (g + 65) : (g + 71);
+            arr[g + 52 + 52 * f][2] = '\0';
+            for (char h = 0; h < 52; h++)
             {
-                arr[h + 25*25]  = char {(char) 97 + f, (char) 97 + g, (char) 97 +h};
-                //strcat((string) 97 + f, (string) 97 + g, (string) 97 + h)
-                for (int i = 0; i < 25; i++)
+                arr[52*53 + h + 52*g + 52*52*f][0] = (f < 26) ? (f + 65) : (f + 71);
+                arr[52*53 + h + 52*g + 52*52*f][1] = (g < 26) ? (g + 65) : (g + 71);
+                arr[52*53 + h + 52*g + 52*52*f][2] = (h < 26) ? (h + 65) : (h + 71);
+                arr[52*53 + h + 52*g + 52*52*f][3] = '\0';
+                // printf("f = %c, g = %c, h = %c, arr = %i\n", f, g, h,h - 97) + 26*27 + ((f -97)*(26^2 +1)) + (g - 97)*(26+1));
+
+                for (char i = 0; i < 52; i++)
                 {
-                    
+                    arr[52*53 + i + 52*h + 52*52*g + 52*52*52*f][0] = (f < 26) ? (f + 65) : (f + 71);
+                    arr[52*53 + i + 52*h + 52*52*g + 52*52*52*f][1] = (g < 26) ? (g + 65) : (g + 71);
+                    arr[52*53 + i + 52*h + 52*52*g + 52*52*52*f][2] = (h < 26) ? (h + 65) : (h + 71);
+                    arr[52*53 + i + 52*h + 52*52*g + 52*52*52*f][3] = (i < 26) ? (i + 65) : (i + 71);
+                    arr[52*53 + i + 52*h + 52*52*g + 52*52*52*f][4] = '\0';
                 }
             }
         }
     }
+    for (int a = 7314000; a < 7314100; a++)
+    {
+        printf("%i: %s\n", a, arr[a]);
+    }
+
+    // if (argc == 2)
+    // {
+    //     string hash = argv[1];
+    //     printf("%s\n", crypt(hash, "abcd"));
+    // }
+    // else
+    // {
+    //     printf("Usage: ./crack hash\n");
+    //     return 1;
+    // }
 }
 
-int hej[] = {1}
+// void crack(void)
+// {
+//     char arr[500000][5];
+//     for (char f = 97; f < 123; f++)
+//     {
+//         arr[f-97][0] = f;
+//         arr[f-97][1] = '\0';
+//         for (char g = 97; g < 123; g++)
+//         {
+//             arr[g - 97 + 25 + 25*(f-97)][0] = f;
+//             arr[g - 97 + 25 + 25*(f-97)][1] = g;
+//             arr[g - 97 + 25 + 25*(f-97)][2] = '\0';
+//             for (char h = 97; h < 123; h++)
+//             {
+//                 arr[g - 97 + 25 + 25*(f-97) + 25*(g-97)][0] = f;
+//                 arr[g - 97 + 25 + 25*(f-97) + 25*(g-97)][1] = g;
+//                 arr[g - 97 + 25 + 25*(f-97) + 25*(g-97)][2] = h;
+//                 arr[g - 97 + 25 + 25*(f-97) + 25*(g-97)][3] = '\0';
+
+//                 for (char i = 97; i < 123; i++)
+//                 {
+//                     arr[g - 97 + 25 + 25*(f-97) + 25*(g-97) + 25*(h-97)][0] = f;
+//                     arr[g - 97 + 25 + 25*(f-97) + 25*(g-97) + 25*(h-97)][1] = g;
+//                     arr[g - 97 + 25 + 25*(f-97) + 25*(g-97) + 25*(h-97)][2] = h;
+//                     arr[g - 97 + 25 + 25*(f-97) + 25*(g-97) + 25*(h-97)][3] = i;
+//                     arr[g - 97 + 25 + 25*(f-97) + 25*(g-97) + 25*(h-97)][4] = '\0';
+//                 }
+//             }
+//         }
+//     }
+//     for (int a = 0; a > 20000; a++)
+//     {
+//         printf("%s", arr[a]);
+//     }
+// }
