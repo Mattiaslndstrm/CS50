@@ -14,8 +14,8 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // assigns the factor argument converted to integer to factor
-    int factor = atoi(argv[1]);
+    // assigns the factor argument converted to double to factor
+    double factor = atof(argv[1]);
     // remember filenames
     char *infile = argv[2];
     char *outfile = argv[3];
@@ -77,7 +77,10 @@ int main(int argc, char *argv[])
             fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
 
             // write RGB triple to outfile
-            fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+            for (int i = 0; i < 4; i++)
+            {
+                fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+            }
         }
 
         // skip over padding, if any
