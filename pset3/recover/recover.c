@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 int main(int argc, char *argv[])
 {
@@ -10,14 +11,24 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    FILE *image = fopen(argv[1], "r");
+    FILE *image = fopen(argv[1], "r"), *out;
     int i, j = 0, k = 0;
+    bool writing = false;
+    char filename[7 + 1];
     while((i = getc(image)) != EOF)
     {
         if (j == 0xff && i == 0xd8)
+        {
+            writing = true;
+            sprintf(filename, k > 9 ? "0%d.jpg" : "00%d.jpg", k);
+            out = fopen(filename, "w");
+            fputc(0xff, out);
             k++;
+        }
+        if (writing)
+            fputc(i, out);
+
         j = i;
-        // printf("%x", i);
 
     }
     printf("Number of jpgegs: %d\n", k);
