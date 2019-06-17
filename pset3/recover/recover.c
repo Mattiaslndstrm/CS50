@@ -27,14 +27,11 @@ int main(int argc, char *argv[])
             writing = true;
             sprintf(filename, k > 9 ? "0%d.jpg" : "00%d.jpg", k);
             out = fopen(filename, "w");
-            fputc(0xff, out);
             k++;
         }
         if (writing)
-            fputc(i, out);
-
+            fputc(j, out);
         j = i;
-
     }
-    printf("Number of jpgegs: %d\n", k);
+    putc(j, out);
 }
