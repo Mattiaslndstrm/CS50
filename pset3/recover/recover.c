@@ -12,6 +12,11 @@ int main(int argc, char *argv[])
     }
 
     FILE *image = fopen(argv[1], "r"), *out;
+    if (image == NULL)
+    {
+        fprintf(stderr, "Can't open forensic image %s\n", argv[1]);
+        return 2;
+    }
     int i, j = 0, k = 0;
     bool writing = false;
     char filename[7 + 1];
