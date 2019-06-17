@@ -28,8 +28,13 @@ void print_jpegs(FILE *image)
     int i, j = 0, k = 0;
     bool writing = false;
     char filename[7 + 1];
+    // Iterates through image until end of file and assigns the currenct char
+    // to i
     while((i = getc(image)) != EOF)
     {
+        // If the current and previous character is a jpeg-header it sets
+        // writing to true, creates a new filename from k, open it and increases
+        // k
         if (j == 0xff && i == 0xd8)
         {
             writing = true;
@@ -37,8 +42,10 @@ void print_jpegs(FILE *image)
             out = fopen(filename, "w");
             k++;
         }
+        // Writes the previous character to the file out if writing is true.
         if (writing)
             fputc(j, out);
+        // Assigns the previous char to j
         j = i;
     }
     putc(j, out);
