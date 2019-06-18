@@ -34,7 +34,7 @@ void write_jpegs(FILE *image)
     while((i = getc(image)) != EOF)
     {
         // If the current and previous character is a jpeg-header it sets
-        // writing to true, creates a new filename from k, open it and increases
+        // writing to true, creates a new filename from k, opens it and increases
         // k
         if (j == 0xff && i == 0xd8)
         {
