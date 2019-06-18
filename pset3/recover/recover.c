@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    // Opens the second command line argument as readonly and assigns it to image.
     FILE *image = fopen(argv[1], "r");
     if (image == NULL)
     {
