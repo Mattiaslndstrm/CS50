@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-void print_jpegs(FILE *image);
+void write_jpegs(FILE *image);
 
 int main(int argc, char *argv[])
 {
@@ -20,10 +20,10 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Can't open forensic image %s\n", argv[1]);
         return 2;
     }
-    print_jpegs(image);
+    write_jpegs(image);
 }
 
-void print_jpegs(FILE *image)
+void write_jpegs(FILE *image)
 {
     FILE *out;
     int i, j = 0, k = 0;
