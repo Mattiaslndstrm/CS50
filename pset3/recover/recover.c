@@ -39,7 +39,7 @@ void write_jpegs(FILE *image)
         if (j == 0xff && i == 0xd8)
         {
             writing = true;
-            sprintf(filename, k < 9 ? "00%d.jpg" : k < 100 ? "0%d.jpg" : "%d.jpg", k);
+            sprintf(filename, k < 10 ? "00%d.jpg" : k < 100 ? "0%d.jpg" : "%d.jpg", k);
             out = fopen(filename, "w");
             k++;
         }
