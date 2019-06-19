@@ -18,7 +18,7 @@ typedef struct node
 node;
 
 // Represents a trie
-node *root;
+node *root, *cur;
 
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
@@ -49,7 +49,35 @@ bool load(const char *dictionary)
     // Insert words into trie
     while (fscanf(file, "%s", word) != EOF)
     {
-        // TODO
+        // Assign cur to point to the root node.
+        cur = root;
+        // Iterate through word with pointer p
+        for (char *p = word; *p; p++)
+        {
+            // If the node for the current letter already exist, only traverse
+            if (cur->children[*p - 97])
+            {
+                cur = cur->children[*p - 97];
+                continue;
+            }
+            // Allocates memory to a new node
+            node *new = malloc(sizeof(node));
+            // Unload the dictionary and returns false if allocation fails
+            if (new == NULL)
+            {
+                unload();
+                return false;
+            }
+            // Assigns the new node to index of the current letter and assigns
+            // cur to point to child node
+            cur->children[*p - 97] = new;
+            cur = new;
+            // Sets all children to NULL
+            for (int i = 0; i < N; i++)
+                cur->children[i] = NULL;
+        }
+        // Since we have iterated through a whole word cur is a word
+        cur->is_word = true;
     }
 
     // Close dictionary
