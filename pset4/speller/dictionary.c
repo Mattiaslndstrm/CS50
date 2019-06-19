@@ -47,6 +47,7 @@ bool load(const char *dictionary)
     FILE *file = fopen(dictionary, "r");
     if (file == NULL)
     {
+        printf("ERROR: failed to open dict\n");
         unload();
         return false;
     }
@@ -60,12 +61,14 @@ bool load(const char *dictionary)
         // Assign cur to point to the root node.
         cur = root;
         // Iterate through word with pointer p
-        for (char *p = word; *p; p++)
+        for (char *p = word; *p != '\0'; p++)
         {
+            // Sets c to 26 if the current char is an apostrophe, else *p - 97
+            int c = *p == '\'' ? 26 : *p - 97;
             // If the node for the current letter already exist, only traverse
-            if (cur->children[*p - 97])
+            if (cur->children[c])
             {
-                cur = cur->children[*p - 97];
+                cur = cur->children[c];
                 continue;
             }
             // Allocates memory to a new node
@@ -73,12 +76,13 @@ bool load(const char *dictionary)
             // Unload the dictionary and returns false if allocation fails
             if (new == NULL)
             {
+                printf("ERROR: malloc failed to allocate to *new\n");
                 unload();
                 return false;
             }
             // Assigns the new node to index of the current letter and assigns
             // cur to point to child node
-            cur->children[*p - 97] = new;
+            cur->children[c] = new;
             cur = new;
             // Sets all children to NULL
             for (int i = 0; i < N; i++)
