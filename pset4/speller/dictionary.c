@@ -20,6 +20,14 @@ node;
 // Represents a trie
 node *root, *cur;
 
+int main(int argc, char *argv[])
+{
+    bool test = load(argv[1]);
+    if (test)
+        printf("Something happened\n");
+    else
+        printf("nothing happened");
+}
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
