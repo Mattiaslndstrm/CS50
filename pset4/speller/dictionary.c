@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #include "dictionary.h"
 
@@ -22,11 +23,12 @@ node *root, *cur;
 
 int main(int argc, char *argv[])
 {
-    bool test = load(argv[1]);
-    if (test)
-        printf("Something happened\n");
+    load(argv[1]);
+    bool word = check(argv[2]);
+    if (word)
+        printf("%s is correctly spelled\n", argv[2]);
     else
-        printf("nothing happened");
+        printf("%s is NOT correctly spelled\n", argv[2]);
 }
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
@@ -109,7 +111,16 @@ unsigned int size(void)
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    // TODO
+    cur = root;
+    for (const char *p = word; *p != '\0'; p++)
+    {
+        int c = tolower(*p) == '\'' ? 26 : tolower(*p) - 97;
+        cur = cur->children[c];
+        if (cur == NULL)
+            return false;
+    }
+    if (cur->is_word)
+        return true;
     return false;
 }
 
