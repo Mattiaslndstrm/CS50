@@ -14,5 +14,6 @@ bool load(const char *dictionary);
 unsigned int size(void);
 bool check(const char *word);
 bool unload(void);
+int char_to_int(const char c);
 
 #endif // DICTIONARY_H
