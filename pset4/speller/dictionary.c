@@ -111,19 +111,28 @@ unsigned int size(void)
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
+    // Starts from the first level of the trie
     cur = root;
+    // Iterates through each char of word
     for (const char *p = word; *p != '\0'; p++)
     {
+        // Assigns the number of char in the alphabet with a being 0 if not
+        // apostrophe, else 26
         int c = char_to_int(*p);
+        // Assigns the children of cur to cur
         cur = cur->children[c];
+        // Checks if cur is initalized, else return false
         if (cur == NULL)
             return false;
     }
+    // Finally checks if the current level corresponds to the last char of a word
     if (cur->is_word)
         return true;
     return false;
 }
 
+
+// Assigns the number of char in the alphabet with a being 0 if not apostrophe, else 26
 int char_to_int(const char c)
 {
     return tolower(c) == '\'' ? 26 : tolower(c) - 97;
