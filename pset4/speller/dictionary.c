@@ -131,16 +131,15 @@ bool check(const char *word)
     return false;
 }
 
-
-// Assigns the number of char in the alphabet with a being 0 if not apostrophe, else 26
-int char_to_int(const char c)
-{
-    return tolower(c) == '\'' ? 26 : tolower(c) - 97;
-}
-
 // Unloads dictionary from memory, returning true if successful else false
 bool unload(void)
 {
     // TODO
     return false;
+}
+
+// Assigns the number of char in the alphabet with a being 0 if not apostrophe, else 26
+int char_to_int(const char c)
+{
+    return tolower(c) == '\'' ? 26 : tolower(c) - 97;
 }
