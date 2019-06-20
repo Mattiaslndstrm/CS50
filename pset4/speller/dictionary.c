@@ -66,7 +66,7 @@ bool load(const char *dictionary)
         for (char *p = word; *p != '\0'; p++)
         {
             // Sets c to 26 if the current char is an apostrophe, else *p - 97
-            int c = *p == '\'' ? 26 : *p - 97;
+            int c = char_to_int(*p);
             // If the node for the current letter already exist, only traverse
             if (cur->children[c])
             {
@@ -114,7 +114,7 @@ bool check(const char *word)
     cur = root;
     for (const char *p = word; *p != '\0'; p++)
     {
-        int c = tolower(*p) == '\'' ? 26 : tolower(*p) - 97;
+        int c = char_to_int(*p);
         cur = cur->children[c];
         if (cur == NULL)
             return false;
@@ -122,6 +122,11 @@ bool check(const char *word)
     if (cur->is_word)
         return true;
     return false;
+}
+
+int char_to_int(const char c)
+{
+    return tolower(c) == '\'' ? 26 : tolower(c) - 97;
 }
 
 // Unloads dictionary from memory, returning true if successful else false
